@@ -13213,6 +13213,50 @@ $( document ).ready(function(){
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="nx">javascript</span>
+<span class="nx">MathJax</span><span class="p">.</span><span class="nx">Hub</span><span class="p">.</span><span class="nx">Config</span><span class="p">({</span>
+    <span class="nx">TeX</span><span class="o">:</span> <span class="p">{</span> <span class="nx">equationNumbers</span><span class="o">:</span> <span class="p">{</span> <span class="nx">autoNumber</span><span class="o">:</span> <span class="s2">&quot;AMS&quot;</span> <span class="p">}</span> <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+
+<div id="c4e023b7-2eb2-4a1b-bddd-05e67327b4d1"></div>
+<div class="output_subarea output_javascript ">
+<script type="text/javascript">
+var element = $('#c4e023b7-2eb2-4a1b-bddd-05e67327b4d1');
+MathJax.Hub.Config({
+    TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
@@ -13273,12 +13317,12 @@ $$<p>where the expectations are taken over all samples from the population. Clea
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Mean-Squared-Error">Mean Squared Error<a class="anchor-link" href="#Mean-Squared-Error">&#182;</a></h4><p>A metric that incorporates both estimator bias and variance is the mean squared error (MSE). For a given estimator $g(X_1,X_2,\cdots X_n)$ and population parameter $\theta$,</p>
 $$
-MSE \equiv E\left[(g-\theta)^2\right] = E\left[g^2 - 2 \theta\;g + \theta^2\right] = E(g^2) -2\theta\;E(g) + \theta^2 
+MSE \equiv E\left[(g-\theta)^2\right] = E\left[g^2 - 2 \theta g + \theta^2\right] = E(g^2) -2\theta E(g) + \theta^2 
 $$<p>Now, for any random variable $Y, E(Y^2) = \text{var}(Y) + E(Y)^2$. So,</p>
 $$
 \begin{split}
-MSE &amp;= E(g^2) -2\theta\;E(g) + \theta^2\\ 
-&amp;= [E(g)^2 + \text{var}(g)]-2\theta\;E(g) + \theta^2\\
+MSE &amp;= E(g^2) -2\theta E(g) + \theta^2\\ 
+&amp;= [E(g)^2 + \text{var}(g)]-2\theta E(g)] + \theta^2\\
 &amp;= [E(g) - \theta]^2 + \text{var}(g)
 \end{split}
 $$
@@ -13288,14 +13332,14 @@ $$
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Estimator-for-population-mean-$\mu$">Estimator for population mean $\mu$<a class="anchor-link" href="#Estimator-for-population-mean-$\mu$">&#182;</a></h3><p>Consider estimators for the population mean $\mu$. Each random variable $X_i$ has an expected value $\mu$ and variance $\sigma^2$. So, if we pick one of them as our estimator for the mean, say $g(X_1,X_2,\cdots X_n) = X_1$, we will have an unbiased estimator with variance $\sigma^2$. However, it is possible to do better than that.The sample mean $\bar{X}$ is also unbiased but is more <strong>efficient</strong> because it has a lower standard deviation:</p>
-$$
+<h3 id="Estimator-for-population-mean-$\mu$">Estimator for population mean $\mu$<a class="anchor-link" href="#Estimator-for-population-mean-$\mu$">&#182;</a></h3><p>Each of the random variables $X_i$ has an expected value $\mu$ and variance $\sigma^2$. We could pick one of them, say $X_1$, as our estimator for the mean. We will then have an unbiased estimator with variance $\sigma^2$. However, it is possible to pick a better estimator, the sample mean $\bar{X} = \frac{1}{n}\sum X_i$. The sample mean is unbiased, but more importantly, it is more <strong>efficient</strong> because it has a lower standard deviation:</p>
+\begin{equation}
+E(\bar{X}) = E\left[\frac{1}{n}\sum_{i=1}^n X_i\right] = \frac{1}{n}\sum_{i=1}^n E(X_i) = \frac{1}{n}\; n\mu = \mu \end{equation}\begin{eqnarray}
 \begin{split}
-E(\bar{X}) &amp;= E\left[\frac{1}{n}\sum_{i=1}^n X_i\right] = \frac{1}{n}\sum_{i=1}^n E(X_i) = \frac{1}{n}\; n\mu = \mu \\ \\
 \text{var}(\bar{X}) &amp;= \frac{1}{n^2}\text{var}\sum X_i = \frac{1}{n^2} \sum\text{var}( X_i) +\sum_{i&lt;j} 2 \text{cov}(X_i,X_j)\\
  &amp;= \frac{1}{n^2} \sum\text{var} (X_i) = \frac{1}{n^2}\; n\sigma^2 = \frac{\sigma^2}{n}
 \end{split}
-$$<p>Here, we have used the fact that $\text{cov}(X_i,X_j) = 0\; \forall\; i,j$ since the $\{X_i\}$ are all independent of each other.</p>
+\end{eqnarray}<p>Here, we have used the fact that $\text{cov}(X_i,X_j) = 0\; \forall\; i,j$ since the $\{X_i\}$ are all independent of each other.</p>
 
 </div>
 </div>
@@ -13319,10 +13363,108 @@ E(g)&amp;= \sum(\sigma^2 + \mu^2) - n\left(\frac{\sigma^2}{n}+\mu^2\right)\\
 \end{split}
 $$</p>
 <p>This implies that the sum of squared deviations from the mean is a biased estimator of the population variance. However, this is easily fixed. The <strong>sample variance</strong>, $s^2$, defined as
-$$
+\begin{equation}
 s^2 \equiv \frac{1}{n-1} \sum_{i=1}^n (X_i-\bar{X})^2
-$$
+\end{equation}
 gives us an unbiased estimator of the population variance $\sigma^2$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Sampling-distributions">Sampling distributions<a class="anchor-link" href="#Sampling-distributions">&#182;</a></h2><p>As seen above, estimators are random variables whose values vary from sample to sample. The distributions corresponding to estimators are known as <strong>sampling distributions</strong>. Knowing the sampling distribution of an estimator allows us to draw conclusions about population parameters.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Distribution-of-the-sample-mean">Distribution of the sample mean<a class="anchor-link" href="#Distribution-of-the-sample-mean">&#182;</a></h3><p>First, consider the case when the <strong>population is normal</strong>, which implies that $X_i \sim N(\mu,\sigma^2)$ for all $i$. We proceed by considering moment generating functions. For $X \sim N(\mu,\sigma^2)$, the moment generating function $M_{X}(t) \equiv E\left(e^{tX}\right) = e^{\mu t + \sigma^2\frac{t^2}{2}}$. This function in unique.</p>
+<p>The moment generating function for $\bar{X}$ is given by</p>
+$$
+M_{\bar{X}}(t) = E\left(e^{t\sum\frac{X_i}{n}}\right)
+= E\left(e^{t\frac{X_1}{n}}\dot  e^{t\frac{X_2}{n}}\cdots e^{t\frac{X_n}{n}} \right)
+= E\left(e^{t\frac{X_1}{n}}\right)E\left(e^{t\frac{X_2}{n}}\right) \cdots E\left(e^{t\frac{X_n}{n}}\right)
+$$<p>where the last equality follows from the fact that the ${X_i}$ are independent of each other.
+$$
+\begin{split}
+M_{\bar{X}}(t) &amp;= \Pi_{i=1}^n M_X(t/n)\\
+&amp;= \Pi_{i=1}^n e^{\mu \frac{t}{n} + \frac{\sigma^2}{n^2}\frac{t^2}{2}}\\
+&amp;= e^{\sum_{i=1}^n \mu \frac{t}{n} + \frac{\sigma^2}{n^2}\frac{t^2}{2}}\\
+&amp;= e^{\mu t + \frac{\sigma^2}{n}\frac{t^2}{2}}
+\end{split}
+$$</p>
+<p>This implies that
+$$
+\boxed{
+\bar{X} \sim N(\mu,\frac{\sigma^2}{n}), \;\text{population normal}
+}
+$$</p>
+<p>In case the <strong>population is not normal</strong>, we use the <strong>Central Limit theorem (CLT)</strong>, which states that for $n$ iid random variables with finite mean $\mu$ and variance $\sigma^2$,
+$$
+\lim_{n\to\infty} P\left(a \le \frac{\sum_{i=1}^n X_i - n\mu}{\sigma \sqrt{n}} \le b\right) = \frac{1}{\sqrt{2\pi}} \int_a^b e^{-\frac{u^2}{2}du}
+$$
+From this, we get
+$$
+\lim_{n\to\infty} P\left(a \le \frac{\bar{X}-\mu}{\sigma/\sqrt{n}} \le b\right) = \frac{1}{\sqrt{2\pi}} \int_a^b e^{-\frac{u^2}{2}du}
+$$
+This states that 
+$$
+\boxed{
+Z=\frac{\bar{X}-\mu}{\sigma/\sqrt{n}} \;\text{ is normally distributed as } n \to \infty \text{ for a non-normal population}
+}
+$$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Distribution-of-the-sample-variance">Distribution of the sample variance<a class="anchor-link" href="#Distribution-of-the-sample-variance">&#182;</a></h3><p>Assume that the population is normal, with finite mean $\mu$ and variance $\sigma^2$. Now,
+$$
+\begin{split}
+\sum (X_i-\mu)^2 &amp;= \sum\left( X_i-\bar{X}+\bar{X}-\mu \right)^2\\
+&amp;= \sum (X_i-\bar{X})^2 + \sum (\bar{X}-\mu)^2 + 2 \sum (X_i-\bar{X})(\bar{X}-\mu)\\
+&amp;= \sum (X_i-\bar{X})^2 + n (\bar{X}-\mu)^2 + 2 (\bar{X}-\mu)\sum(X_i-\bar{X})
+\end{split}
+$$
+Now, since $\sum(X_i-\bar{X}) = 0$, we have
+$$
+\sum (X_i-\mu)^2 = \sum (X_i-\bar{X})^2 + n (\bar{X}-\mu)^2
+$$
+Dividing throughout by $\sigma^2$,
+$$
+\sum \left(\frac{X_i-\mu}{\sigma}\right)^2 = \sum \frac{(X_i-\bar{X})^2}{\sigma^2} + \left(\frac{\bar{X}-\mu}{\sigma/\sqrt{n}}\right)^2
+$$
+We can rewrite this as
+$$
+\sum Z_i^2 = \frac{(n-1)s^2}{\sigma^2} + Z_{\bar{X}}^2
+$$
+The $Z_i$ are all standard normal variables, and so is $Z_{\bar{X}}$, because we are assuming that the population is normal.</p>
+<p>Let $Q = \sum Z_i^2, R = \frac{(n-1)s^2}{\sigma^2}, S = Z_{\bar{X}}^2$, and note that
+$$
+Q \sim \chi_n^2, \qquad S \sim \chi_1^2
+$$
+since the sum of $n$ squared standard normal variables is $\chi_n^2$ distributed.</p>
+<p>Now, for independent random variables $R, S$ and $Q=R+S$, the moment generating functions can be written as:
+$$
+M_Q(t) = E(e^{tQ}) = E(e^{tR}e^{tS}) = E(e^{tR}) E(e^{tS}) = M_R(t) M_S(t) \implies M_R(t) = \frac{M_Q(t)}{M_S(t)}
+$$
+Since
+$$
+M_Q(t) = \left(1-2t\right)^{-\frac{n}{2}} \text{  and  } M_S(t) = \left(1-2t\right)^{-\frac{1}{2}}
+$$
+we get $M_R(t) = \left(1-2t\right)^{-\frac{n-1}{2}}$.</p>
+<p>Since the moment generating function is unique,
+$$
+\boxed{
+\frac{(n-1)s^2}{\sigma^2} \sim \chi_{n-1}^2, \; \text{population normal}
+}
+$$</p>
 
 </div>
 </div>
